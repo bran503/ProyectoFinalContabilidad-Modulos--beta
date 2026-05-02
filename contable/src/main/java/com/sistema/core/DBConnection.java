@@ -54,7 +54,7 @@ public class DBConnection {
                     conn.close();
                 }
             } catch (SQLException e) {
-                System.err.println("⚠️ Error al cerrar conexión: " + e.getMessage());
+                System.err.println(" Error al cerrar conexión: " + e.getMessage());
             }
         }
     }
