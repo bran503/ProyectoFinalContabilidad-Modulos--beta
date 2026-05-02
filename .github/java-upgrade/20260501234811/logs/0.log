@@ -1,0 +1,20 @@
+2026-05-01T23:48:11.833Z [INFO] ----------------------invoke appmod-install-maven----------------------
+2026-05-01T23:48:11.834Z [INFO] [Tool.invoke]({name: appmod-install-maven, modelId: auto, input: {
+  "version": "latest",
+  "dest": "C:\\Users\\Duran\\.maven",
+  "projectPath": "c:\\Users\\Duran\\Downloads\\ProyectoFinalContabilidad-Modulos--beta"
+}}).
+2026-05-01T23:48:11.835Z [INFO] [Tool.invoke] do invoke.
+2026-05-01T23:48:17.135Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "mvn",
+    "path": "C:\\Users\\Duran\\.maven\\maven-3.9.15\\bin",
+    "version": "3.9.15"
+  },
+  "message": "Maven latest is installed at C:\\Users\\Duran\\.maven\\maven-3.9.15\\bin",
+  "telemetry": {
+    "tool": "Maven",
+    "version": "latest"
+  }
+}}).
+2026-05-01T23:48:17.135Z [INFO] ----------------------invoked appmod-install-maven----------------------

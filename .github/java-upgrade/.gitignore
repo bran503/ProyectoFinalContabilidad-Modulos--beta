@@ -1,0 +1,14 @@
+# Java
+*.class
+*.jar
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Configuración sensible
+*.properties
+!pom.xml
