@@ -1,4 +1,4 @@
-# Sistema Contable - Módulo de Compras (Grupo 1)
+# Módulo de Compras (Grupo 1)
 
 ## Tecnologías
 - Java 17 + Swing

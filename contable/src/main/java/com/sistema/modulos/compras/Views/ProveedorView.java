@@ -84,7 +84,7 @@ public class ProveedorView extends JFrame {
         btnEliminar.setForeground(Color.WHITE);
         panelBotones.add(btnEliminar);
 
-        btnLimpiar = new JButton("🧹 Limpiar");
+        btnLimpiar = new JButton(" Limpiar");
         panelBotones.add(btnLimpiar);
 
         panelFormulario.add(panelBotones);
