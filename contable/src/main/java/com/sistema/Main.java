@@ -7,7 +7,7 @@ import com.sistema.modulos.compras.Views.PagoView;
 
 import javax.swing.*;
 import java.awt.*;
-//esta es una prueva de muchos amuchos cambios que se van a hacer... en el proyecto para mejorar la calidad del codigo y la arquitectura del proyecto
+
 public class Main {
     public static void main(String[] args) {
         SessionManager.getInstancia().iniciarSesion(
@@ -17,14 +17,6 @@ public class Main {
                 "Admin" // nombre_usuario
         );
 
-        JButton btnPagos = new JButton(" Cuentas por Pagar / Pagos");
-        btnPagos.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        btnPagos.setFocusPainted(false);
-        btnPagos.addActionListener(e -> {
-            PagoView view = new PagoView();
-            view.setVisible(true);
-        });
-
         SwingUtilities.invokeLater(() -> {
             JFrame menu = new JFrame("MODULOS GT 1 ");
             menu.setSize(420, 320);
@@ -32,7 +24,14 @@ public class Main {
             menu.setLocationRelativeTo(null);
             menu.setLayout(new GridLayout(0, 1, 15, 15));
             menu.getContentPane().setBackground(new Color(245, 245, 245));
-
+            
+            JButton btnPagos = new JButton(" Cuentas por Pagar / Pagos");
+            btnPagos.setFont(new Font("Segoe UI", Font.BOLD, 15));
+            btnPagos.setFocusPainted(false);
+            btnPagos.addActionListener(e -> {
+                PagoView view = new PagoView();
+                view.setVisible(true);
+            });
             // 🔹 Botón Módulo Proveedores
             JButton btnProveedores = new JButton("Gestión de Proveedores");
             btnProveedores.setFont(new Font("Segoe UI", Font.BOLD, 15));
