@@ -7,7 +7,7 @@ import com.sistema.modulos.compras.Views.PagoView;
 
 import javax.swing.*;
 import java.awt.*;
-//by dm
+//esta es una pruvea
 public class Main {
     public static void main(String[] args) {
         SessionManager.getInstancia().iniciarSesion(
