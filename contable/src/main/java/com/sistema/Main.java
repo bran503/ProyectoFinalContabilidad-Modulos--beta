@@ -7,7 +7,7 @@ import com.sistema.modulos.compras.Views.PagoView;
 
 import javax.swing.*;
 import java.awt.*;
-//esta es una pruvea
+//esta es una prueva de muchos amuchos cambios que se van a hacer... en el proyecto para mejorar la calidad del codigo y la arquitectura del proyecto
 public class Main {
     public static void main(String[] args) {
         SessionManager.getInstancia().iniciarSesion(
