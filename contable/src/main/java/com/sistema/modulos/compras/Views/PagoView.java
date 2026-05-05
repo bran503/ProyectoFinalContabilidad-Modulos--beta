@@ -11,28 +11,28 @@ import java.util.List;
 public class PagoView extends JPanel {
 
     private PagoController controller;
-
     private JTextField txtIdFactura;
     private JTextField txtProveedor;
     private JTextField txtNumero;
     private JTextField txtTotal;
     private JTextField txtSaldo;
     private JTextField txtMontoPago;
-
     private JTable tablaFacturas;
     private DefaultTableModel modeloTabla;
+    private JButton btnRegistrarPago;
+    private JButton btnRefrescar;
+    private JButton btnLimpiar;
 
     public PagoView() {
         super(new BorderLayout(10, 10));
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        this.setPreferredSize(new Dimension(900, 500)); // Tamaño sugerido para el contenedor
+        this.setPreferredSize(new Dimension(900, 500));
         initComponents();
         this.controller = new PagoController(this);
         
     }
 
     private void initComponents() {
- 
         JPanel formPanel = new JPanel(new GridLayout(6, 2, 10, 5));
         formPanel.setBorder(BorderFactory.createTitledBorder("Datos de la Factura"));
 
@@ -67,6 +67,37 @@ public class PagoView extends JPanel {
         txtMontoPago.setFont(new Font("Arial", Font.BOLD, 14));
         formPanel.add(txtMontoPago);
 
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
+
+        btnRegistrarPago = new JButton("Registrar Pago");
+        btnRegistrarPago.setBackground(new Color(0, 150, 136));
+        btnRegistrarPago.setForeground(Color.WHITE);
+        btnRegistrarPago.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnRegistrarPago.setFocusPainted(false);
+        btnRegistrarPago.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRegistrarPago.setPreferredSize(new Dimension(140, 35));
+
+        btnRefrescar = new JButton("Refrescar");
+        btnRefrescar.setBackground(new Color(33, 150, 243));
+        btnRefrescar.setForeground(Color.WHITE);
+        btnRefrescar.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnRefrescar.setFocusPainted(false);
+        btnRefrescar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRefrescar.setPreferredSize(new Dimension(120, 35));
+
+        btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBackground(new Color(158, 158, 158));
+        btnLimpiar.setForeground(Color.WHITE);
+        btnLimpiar.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnLimpiar.setFocusPainted(false);
+        btnLimpiar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnLimpiar.setPreferredSize(new Dimension(120, 35));
+
+        panelBotones.add(btnRegistrarPago);
+        panelBotones.add(btnRefrescar);
+        panelBotones.add(btnLimpiar);
+
         JPanel panelTabla = new JPanel(new BorderLayout());
         panelTabla.setBorder(BorderFactory.createTitledBorder("Facturas Pendientes"));
         
@@ -80,24 +111,13 @@ public class PagoView extends JPanel {
         tablaFacturas.setRowHeight(25);
         panelTabla.add(new JScrollPane(tablaFacturas), BorderLayout.CENTER);
 
-        JPanel botones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton btnPagar = new JButton("Registrar Pago");
-        btnPagar.setBackground(new Color(0, 150, 136));
-        btnPagar.setForeground(Color.WHITE);
-        btnPagar.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        
-        JButton btnRefrescar = new JButton("Refrescar");
-
-        botones.add(btnRefrescar);
-        botones.add(btnPagar);
-
         this.add(formPanel, BorderLayout.NORTH);
         this.add(panelTabla, BorderLayout.CENTER);
-        this.add(botones, BorderLayout.SOUTH);
+        this.add(panelBotones, BorderLayout.SOUTH);
 
-        // Listeners (idénticos a tu versión original)
-        btnPagar.addActionListener(e -> controller.registrarPago());
+        btnRegistrarPago.addActionListener(e -> controller.registrarPago());
         btnRefrescar.addActionListener(e -> controller.cargarFacturas());
+        btnLimpiar.addActionListener(e -> limpiarFormulario());
 
         tablaFacturas.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {

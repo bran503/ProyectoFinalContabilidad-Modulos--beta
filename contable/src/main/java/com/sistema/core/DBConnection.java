@@ -7,19 +7,19 @@ import java.sql.SQLException;
 
 public class DBConnection {
     
-    //private static final String URL = "jdbc:postgresql://aws-1-us-west-2.pooler.supabase.com:6543/postgres";
-    //private static final String USER = "postgres.qdgyxauteocampukljjo";
-    //private static final String PASSWORD = "isU0hqUbGHmr55xb";
-    private static final String URL = "jdbc:postgresql://localhost:5432/sistema_contable";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "12345";
+    private static final String URL = "jdbc:postgresql://aws-1-us-west-2.pooler.supabase.com:6543/postgres";
+    private static final String USER = "postgres.qdgyxauteocampukljjo";
+    private static final String PASSWORD = "isU0hqUbGHmr55xb";
+    // private static final String URL = "jdbc:postgresql://localhost:5432/sistema_contable";
+    // private static final String USER = "postgres";
+    // private static final String PASSWORD = "12345";
     private DBConnection() {}
    
     public static Connection obtenerConexion() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            conn.setAutoCommit(false); // Manejo manual de transacciones
+            conn.setAutoCommit(false);
             return conn;
         } catch (ClassNotFoundException e) {
             throw new SQLException("Driver PostgreSQL no encontrado", e);
