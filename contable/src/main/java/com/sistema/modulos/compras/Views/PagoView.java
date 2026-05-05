@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class PagoView extends JFrame {
+public class PagoView extends JPanel {
 
     private PagoController controller;
 
@@ -23,19 +23,16 @@ public class PagoView extends JFrame {
     private DefaultTableModel modeloTabla;
 
     public PagoView() {
+        super(new BorderLayout(10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.setPreferredSize(new Dimension(900, 500)); // Tamaño sugerido para el contenedor
         initComponents();
-          this.controller = new PagoController(this);
+        this.controller = new PagoController(this);
+        
     }
 
     private void initComponents() {
-        setTitle(" Cuentas por Pagar - Registrar Pago");
-        setSize(900, 500);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        JPanel principal = new JPanel(new BorderLayout(10, 10));
-        principal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+ 
         JPanel formPanel = new JPanel(new GridLayout(6, 2, 10, 5));
         formPanel.setBorder(BorderFactory.createTitledBorder("Datos de la Factura"));
 
@@ -94,14 +91,12 @@ public class PagoView extends JFrame {
         botones.add(btnRefrescar);
         botones.add(btnPagar);
 
-        principal.add(formPanel, BorderLayout.NORTH);
-        principal.add(panelTabla, BorderLayout.CENTER);
-        principal.add(botones, BorderLayout.SOUTH);
+        this.add(formPanel, BorderLayout.NORTH);
+        this.add(panelTabla, BorderLayout.CENTER);
+        this.add(botones, BorderLayout.SOUTH);
 
-        add(principal);
-
+        // Listeners (idénticos a tu versión original)
         btnPagar.addActionListener(e -> controller.registrarPago());
-
         btnRefrescar.addActionListener(e -> controller.cargarFacturas());
 
         tablaFacturas.getSelectionModel().addListSelectionListener(e -> {
@@ -147,7 +142,6 @@ public class PagoView extends JFrame {
     }
 
     public String getMontoPago() { return txtMontoPago.getText(); }
-    
     public void setMontoPago(String val) { txtMontoPago.setText(val); }
     
     public void setDatosFactura(String prov, String num, String total, String saldo) {

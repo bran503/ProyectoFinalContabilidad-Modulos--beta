@@ -1,6 +1,5 @@
 package com.sistema.modulos.compras.Views;
 
-
 import com.sistema.modulos.compras.Controllers.FacturaCompraController;
 import com.sistema.modulos.compras.Models.Proveedor;
 
@@ -9,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class FacturaCompraView extends JFrame {
+public class FacturaCompraView extends JPanel {
 
     private FacturaCompraController controller;
     private JComboBox<Proveedor> cmbProveedor;
@@ -20,18 +19,18 @@ public class FacturaCompraView extends JFrame {
     private DefaultTableModel modeloTabla;
 
     public FacturaCompraView() {
-        initComponents();
+        super(new BorderLayout());
+         initComponents();
         this.controller = new FacturaCompraController(this);
+       
     }
 
     private void initComponents() {
-        setTitle(" Ingreso de Facturas de Compra");
-        setSize(1000, 650);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        this.setLayout(new BorderLayout(10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.setPreferredSize(new Dimension(1000, 650)); // Tamaño sugerido para el CardLayout
 
         JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
-        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel panelForm = new JPanel(new GridBagLayout());
         panelForm.setBorder(BorderFactory.createTitledBorder("Datos de la Factura"));
@@ -49,7 +48,6 @@ public class FacturaCompraView extends JFrame {
             }
         });
         panelForm.add(cmbProveedor, gbc);
-
         gbc.gridx = 2; gbc.weightx = 0; panelForm.add(new JLabel("Tipo Doc:"), gbc);
         gbc.gridx = 3; gbc.weightx = 0.5;
         cmbTipoDoc = new JComboBox<>(new String[]{"CCF", "FAC", "EXP"});
@@ -69,10 +67,12 @@ public class FacturaCompraView extends JFrame {
 
         gbc.gridx = 0; gbc.gridy = 3; panelForm.add(new JLabel("TOTAL:"), gbc);
         gbc.gridx = 1; gbc.gridwidth = 3; txtTotal = new JTextField("0.00"); txtTotal.setFont(new Font("Arial", Font.BOLD, 14)); txtTotal.setHorizontalAlignment(JTextField.RIGHT); panelForm.add(txtTotal, gbc);
+        gbc.gridwidth = 1; // 🔹 Reset gridwidth para evitar efectos en filas siguientes
 
         gbc.gridy = 4; gbc.gridwidth = 4;
         txtObservaciones = new JTextArea(3, 20); txtObservaciones.setLineWrap(true);
         panelForm.add(new JScrollPane(txtObservaciones), gbc);
+        gbc.gridwidth = 1;
 
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         JButton btnGuardar = new JButton(" Guardar");
@@ -93,7 +93,8 @@ public class FacturaCompraView extends JFrame {
 
         panelPrincipal.add(panelForm, BorderLayout.NORTH);
         panelPrincipal.add(panelTabla, BorderLayout.CENTER);
-        add(panelPrincipal);
+
+        this.add(panelPrincipal, BorderLayout.CENTER);
 
         btnGuardar.addActionListener(e -> controller.guardarFactura());
         btnCalcular.addActionListener(e -> controller.calcularMontos());
@@ -134,13 +135,5 @@ public class FacturaCompraView extends JFrame {
 
     public void mostrarMensaje(String msg, String titulo, int tipo) {
         JOptionPane.showMessageDialog(this, msg, titulo, tipo);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            com.sistema.core.security.SessionManager.getInstancia()
-                .iniciarSesion(1L, "Empresa Test", 1L, "Admin");
-            new FacturaCompraView().setVisible(true);
-        });
     }
 }

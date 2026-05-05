@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ProveedorView extends JFrame {
+public class ProveedorView extends JPanel {
 
     private ProveedorController controller;
 
@@ -26,19 +26,16 @@ public class ProveedorView extends JFrame {
     private DefaultTableModel modeloTabla;
 
     public ProveedorView() {
+        super(new BorderLayout(10, 10));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.setPreferredSize(new Dimension(900, 600)); // Tamaño sugerido para el CardLayout
         initComponents();
         this.controller = new ProveedorController(this);
-        cargarProveedores();
+        
+        cargarProveedores(); // Se mantiene la carga inicial
     }
 
     private void initComponents() {
-        setTitle("Gestión de Proveedores - Módulo de Compras");
-        setSize(900, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
-        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel panelFormulario = new JPanel();
         panelFormulario.setLayout(new GridLayout(6, 2, 5, 5));
@@ -110,10 +107,11 @@ public class ProveedorView extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tablaProveedores);
         panelTabla.add(scrollPane, BorderLayout.CENTER);
 
+        JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.add(panelFormulario, BorderLayout.NORTH);
         panelPrincipal.add(panelTabla, BorderLayout.CENTER);
 
-        add(panelPrincipal);
+        this.add(panelPrincipal, BorderLayout.CENTER);
 
         agregarListeners();
     }
@@ -175,21 +173,10 @@ public class ProveedorView extends JFrame {
         tablaProveedores.clearSelection();
     }
 
-    public String getNombre() {
-        return txtNombre.getText();
-    }
-
-    public String getNit() {
-        return txtNit.getText();
-    }
-
-    public String getNrc() {
-        return txtNrc.getText();
-    }
-
-    public boolean isEsContribuyente() {
-        return chkContribuyente.isSelected();
-    }
+    public String getNombre() { return txtNombre.getText(); }
+    public String getNit() { return txtNit.getText(); }
+    public String getNrc() { return txtNrc.getText(); }
+    public boolean isEsContribuyente() { return chkContribuyente.isSelected(); }
 
     public Long getIdProveedor() {
         try {
@@ -201,12 +188,5 @@ public class ProveedorView extends JFrame {
 
     public void mostrarMensaje(String mensaje, String titulo, int tipo) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, tipo);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ProveedorView view = new ProveedorView();
-            view.setVisible(true);
-        });
     }
 }
